@@ -83,7 +83,8 @@ document.querySelector("body").appendChild(chatbotContainer);
 
 /* ---- Functional javaScript---- */
 const accessToken = "3796899bd37c423bad3a21a25277bce0";
-const baseUrl = "https://api.api.ai/api/query?v=2015091001";
+// const baseUrl = "https://api.api.ai/api/query?v=2015091001";
+const baseUrl = "http://localhost:8080/api/v1/hello";
 const sessionId = "20150910";
 const loader = `<span class='loader'><span class='loader__dot'></span><span class='loader__dot'></span><span class='loader__dot'></span></span>`;
 const errorMessage =
@@ -269,7 +270,8 @@ const processResponse = (val) => {
 
 const setResponse = (val, delay = 0) => {
   setTimeout(() => {
-    aiMessage(processResponse(val));
+    // aiMessage(processResponse(val));
+    aiMessage(val);
   }, delay);
 };
 
@@ -286,11 +288,12 @@ const scrollDown = () => {
 };
 
 const send = (text = "") => {
-  fetch(`${baseUrl}&query=${text}&lang=en&sessionId=${sessionId}`, {
+  // `${baseUrl}&query=${text}&lang=en&sessionId=${sessionId}`
+  fetch(`${baseUrl}`, {
     method: "GET",
     dataType: "json",
     headers: {
-      Authorization: "Bearer " + accessToken,
+      // Authorization: "Bearer " + accessToken,
       "Content-Type": "application/json; charset=utf-8",
     },
   })
@@ -300,10 +303,12 @@ const send = (text = "") => {
         let error = new Error(res.statusText);
         throw error;
       }
+      console.log(res);
       return res;
     })
     .then((res) => {
-      setResponse(res.result, botLoadingDelay + botReplyDelay);
+      console.log(res.message);
+      setResponse(res.message, botLoadingDelay + botReplyDelay);
     })
     .catch((error) => {
       setResponse(errorMessage, botLoadingDelay + botReplyDelay);
