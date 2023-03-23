@@ -287,15 +287,16 @@ const scrollDown = () => {
   return false;
 };
 
-const send = (text = "") => {
+const send = (prompt = {}) => {
   // `${baseUrl}&query=${text}&lang=en&sessionId=${sessionId}`
   fetch(`${baseUrl}`, {
-    method: "GET",
+    method: "POST",
     dataType: "json",
     headers: {
       // Authorization: "Bearer " + accessToken,
       "Content-Type": "application/json; charset=utf-8",
     },
+    body: JSON.stringify({ prompt }),
   })
     .then((response) => response.json())
     .then((res) => {
@@ -303,11 +304,9 @@ const send = (text = "") => {
         let error = new Error(res.statusText);
         throw error;
       }
-      console.log(res);
       return res;
     })
     .then((res) => {
-      console.log(res.message);
       setResponse(res.message, botLoadingDelay + botReplyDelay);
     })
     .catch((error) => {
