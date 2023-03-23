@@ -8,19 +8,50 @@ chatbotHeader.classList.add("chatbot__header");
 
 const headerText = document.createElement("p");
 headerText.innerHTML =
-  '<strong>Got a question?</strong> <span class="u-text-highlight">Ask Rahim</span>';
+  '<strong>Got a question?</strong> <span class="u-text-highlight">Ask chatGPT</span>';
 chatbotHeader.appendChild(headerText);
-
-const closeSpeechIcon = document.createElement("svg");
+// chat svg icon
+const closeSpeechIcon = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "svg"
+);
 closeSpeechIcon.classList.add("chatbot__close-button", "icon-speech");
-closeSpeechIcon.setAttribute("viewBox", "0 0 32 32");
-closeSpeechIcon.innerHTML = '<use xlink:href="#icon-speech"></use>';
+const closeSpeechIconPath = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "path"
+);
+closeSpeechIcon.setAttribute("fill", "none");
+closeSpeechIcon.setAttribute("viewBox", "0 0 22 22");
+closeSpeechIcon.setAttribute("stroke-width", "1.5");
+closeSpeechIcon.setAttribute("stroke", "currentColor");
+closeSpeechIconPath.setAttribute("stroke-linecap", "round");
+closeSpeechIconPath.setAttribute("stroke-linejoin", "round");
+closeSpeechIconPath.setAttribute(
+  "d",
+  "M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"
+);
+closeSpeechIcon.appendChild(closeSpeechIconPath);
+// closeSpeechIcon.innerHTML = '<use xlink:href="#icon-speech"></use>';
 chatbotHeader.appendChild(closeSpeechIcon);
 
-const closeIcon = document.createElement("svg");
+// close svg icon
+const closeIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 closeIcon.classList.add("chatbot__close-button", "icon-close");
-closeIcon.setAttribute("viewBox", "0 0 32 32");
-closeIcon.innerHTML = '<use xlink:href="#icon-close"></use>';
+const closeIconPath = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "path"
+);
+closeIcon.setAttribute("fill", "none");
+closeIcon.setAttribute("viewBox", "0 0 20 20");
+closeIcon.setAttribute("stroke-width", "1.5");
+closeIcon.setAttribute("stroke", "currentColor");
+closeIconPath.setAttribute("stroke-linecap", "round");
+closeIconPath.setAttribute("stroke-linejoin", "round");
+closeIconPath.setAttribute("d", "M6 18L18 6M6 6l12 12");
+
+closeIcon.appendChild(closeIconPath);
+
+// closeIcon.innerHTML = '<use xlink:href="#icon-close"></use>';
 chatbotHeader.appendChild(closeIcon);
 
 // Create the chatbot message window
@@ -36,10 +67,28 @@ initialMessage.classList.add("is-ai", "animation");
 const profilePicture = document.createElement("div");
 profilePicture.classList.add("is-ai__profile-picture");
 
-const avatarIcon = document.createElement("svg");
+// svg avatar icons
+const avatarIcon = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "svg"
+);
 avatarIcon.classList.add("icon-avatar");
+const avatarIconPath = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "path"
+);
+avatarIcon.setAttribute("fill", "none");
 avatarIcon.setAttribute("viewBox", "0 0 32 32");
-avatarIcon.innerHTML = '<use xlink:href="#avatar"></use>';
+avatarIcon.setAttribute("stroke-width", "1.5");
+avatarIcon.setAttribute("stroke", "currentColor");
+avatarIconPath.setAttribute("stroke-linecap", "round");
+avatarIconPath.setAttribute("stroke-linejoin", "round");
+avatarIconPath.setAttribute(
+  "d",
+  "M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z"
+);
+avatarIcon.appendChild(avatarIconPath);
+// avatarIcon.innerHTML = '<use xlink:href="#avatar"></use>';
 profilePicture.appendChild(avatarIcon);
 
 initialMessage.appendChild(profilePicture);
@@ -51,7 +100,7 @@ initialMessage.appendChild(arrow);
 const message = document.createElement("p");
 message.classList.add("chatbot__message");
 message.innerText =
-  "Hi there 🖐. I’m Rahim, your virtual assistant. I'm here to help with your general enquiries.";
+  "Hi there 🖐. I’m ChatGPT, your virtual assistant. I'm here to help with your general enquiries.";
 initialMessage.appendChild(message);
 
 messagesList.appendChild(initialMessage);
@@ -66,11 +115,24 @@ input.setAttribute("type", "text");
 input.classList.add("chatbot__input");
 input.setAttribute("placeholder", "Write a message...");
 chatbotInput.appendChild(input);
-
-const sendIcon = document.createElement("svg");
+// send icon svg
+const sendIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 sendIcon.classList.add("chatbot__submit");
+const sendIconPath = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "path"
+);
+sendIcon.setAttribute("fill", "none");
 sendIcon.setAttribute("viewBox", "0 0 32 32");
-sendIcon.innerHTML = '<use xlink:href="#icon-send"></use>';
+sendIcon.setAttribute("stroke-width", "1.5");
+sendIcon.setAttribute("stroke", "currentColor");
+sendIconPath.setAttribute("stroke-linecap", "round");
+sendIconPath.setAttribute("stroke-linejoin", "round");
+sendIconPath.setAttribute(
+  "d",
+  "M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
+);
+sendIcon.appendChild(sendIconPath);
 chatbotInput.appendChild(sendIcon);
 
 // Append everything to the chatbot container

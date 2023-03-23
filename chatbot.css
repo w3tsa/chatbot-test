@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,600");
+
+body {
+  background-color: black;
+}
 .chatbot {
   position: fixed;
   top: 0;
@@ -230,14 +234,14 @@
 }
 
 .chatbot__submit {
-  fill: #7226e0;
-  height: 22px;
-  width: 22px;
+  fill: white;
+  height: 42px;
+  width: 42px;
   transition: fill 0.2s ease;
   cursor: pointer;
 }
 .chatbot__submit:hover {
-  fill: #45148c;
+  fill: rgb(119, 4, 243);
 }
 
 .u-text-highlight {
