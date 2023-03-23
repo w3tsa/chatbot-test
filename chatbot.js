@@ -144,6 +144,7 @@ chatbotContainer.appendChild(chatbotInput);
 document.querySelector("body").appendChild(chatbotContainer);
 
 /* ---- Functional javaScript---- */
+
 const accessToken = "3796899bd37c423bad3a21a25277bce0";
 // const baseUrl = "https://api.api.ai/api/query?v=2015091001";
 const baseUrl = "http://localhost:8080/api/v1/hello";
@@ -165,6 +166,12 @@ const $chatbotSubmit = $document.querySelector(".chatbot__submit");
 
 const botLoadingDelay = 1000;
 const botReplyDelay = 2000;
+
+(function () {
+  if (validatePage(location.pathname)) {
+    $chatbotInput.setAttribute("placeholder", "Here is your travel itinerary");
+  }
+})();
 
 document.addEventListener(
   "keypress",
@@ -351,6 +358,7 @@ const scrollDown = () => {
 
 const send = (prompt = {}) => {
   // `${baseUrl}&query=${text}&lang=en&sessionId=${sessionId}`
+  let newPrompt = createTravelItineraryPrompt();
   fetch(`${baseUrl}`, {
     method: "POST",
     dataType: "json",
@@ -358,7 +366,7 @@ const send = (prompt = {}) => {
       // Authorization: "Bearer " + accessToken,
       "Content-Type": "application/json; charset=utf-8",
     },
-    body: JSON.stringify({ prompt }),
+    body: JSON.stringify({ prompt: newPrompt || prompt }),
   })
     .then((response) => response.json())
     .then((res) => {
@@ -379,4 +387,38 @@ const send = (prompt = {}) => {
 
   aiMessage(loader, true, botLoadingDelay);
 };
+/* ---- End ---- */
+
+/* ---- Functional javaScript: create the Travel Itinerary---- */
+
+/* helper */
+function validatePage(pathname) {
+  if (
+    pathname === "/air/booking/price.html" ||
+    pathname.indexOf("price") > -1
+  ) {
+    return true;
+  }
+  return false;
+}
+/* --- end --- */
+
+function createTravelItineraryPrompt() {
+  if (validatePage(location.pathname) === false) return;
+  console.log(validatePage(location.pathname));
+  let prompt = "";
+  const timeline =
+    document.querySelector(
+      ".date-range.header-product-summary--date-range > .swa-g-screen-reader-only"
+    )?.textContent || "APR 12 15";
+  const cities =
+    document.querySelector(
+      ".header-product-summary--description > .header-booking--text"
+    )?.textContent || "IND LAS";
+
+  prompt = `can you suggest a more detailed itinerary like what to see and where to eat based on the timeline: ${timeline} and the cities: ${cities} that are only available in use and please respond in a clearly marked and bulleted manner`;
+
+  return prompt;
+}
+
 /* ---- End ---- */
